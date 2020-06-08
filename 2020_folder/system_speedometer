@@ -1,0 +1,49 @@
+#!/usr/bin/python3 
+print("************************************************")
+print ("this_is_a_speedometer")
+print("************************************************\n")
+
+import time
+def timer():
+    now = time.localtime(time.time())
+    return now[5]
+def time_calc():
+    global sum_time
+    global old_time
+    global current_time
+    if current_time == old_time:
+        pass
+    elif current_time < old_time:
+        added_seconds = current_time - old_time + 60
+        sum_time += added_seconds
+        old_time = current_time
+    else:
+        added_seconds = current_time - old_time
+        sum_time += added_seconds
+        old_time = current_time
+
+count=0
+old_time=timer()
+sum_time = 0
+wait_time=0
+wait_time= int(input('enter wait time : '))
+while True:
+    if wait_time == 0:
+        pass
+    else:
+        if count == 0:
+            old_time =  timer()
+            count += 1
+        else:
+            current_time=timer()
+            time_calc()
+            if sum_time < wait_time:
+                count = count + 1
+            else:
+                break
+
+speed = count / sum_time
+kspeed = int(speed / 1000)
+print('time passed = ', sum_time)
+print('speed = ', speed , 'Hz')
+print('SPEED = ', kspeed, 'KHz')
